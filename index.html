@@ -924,7 +924,7 @@ function bookViaiMessage(){
 
 /* ============================================================
    BOOKING → Telegram
-   Now it grabs the form data and pre-fills the Telegram message!
+   Copies the message to clipboard, then opens Telegram.
    ============================================================ */
 function bookViaTelegram(){
   const name = document.getElementById('bName').value.trim();
@@ -960,13 +960,18 @@ function bookViaTelegram(){
   msg += '✅ Agreed to $50 deposit: Yes\n';
   msg += '\nThank you! 💕';
 
-  const encodedMsg = encodeURIComponent(msg);
-  
-  // Telegram URL structure for pre-filling messages
-  const telegramURL = 'https://t.me/htxhairstyle?text=' + encodedMsg;
-
-  // Open Telegram
-  window.open(telegramURL, '_blank');
+  // Copy to clipboard first, then open Telegram
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(msg).then(() => {
+      alert('✅ Booking details copied! \n\nTelegram will open next. Just long-press the message box, hit Paste, and hit Send!');
+      window.open('https://t.me/htxhairstyle', '_blank');
+    }).catch(err => {
+      // Fallback if clipboard fails
+      window.open('https://t.me/htxhairstyle?text=' + encodeURIComponent(msg), '_blank');
+    });
+  } else {
+    window.open('https://t.me/htxhairstyle?text=' + encodeURIComponent(msg), '_blank');
+  }
 }
 
 /* ============================================
