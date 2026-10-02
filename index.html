@@ -591,12 +591,6 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border)}
 
     <div class="payment-grid">
 
-      <button class="payment-card" onclick="openPayModal('PayPal')">
-        <i class="fa-brands fa-paypal"></i>
-        <h4>PayPal</h4>
-        <p>Secure online payment</p>
-      </button>
-
       <button class="payment-card" onclick="openPayModal('Cash App')">
         <i class="fa-solid fa-dollar-sign"></i>
         <h4>Cash App</h4>
@@ -607,18 +601,6 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border)}
         <i class="fa-solid fa-bolt"></i>
         <h4>Zelle</h4>
         <p>Bank-to-bank</p>
-      </button>
-
-      <button class="payment-card" onclick="openPayModal('eTransfer')">
-        <i class="fa-solid fa-building-columns"></i>
-        <h4>eTransfer</h4>
-        <p>Interac / Bank</p>
-      </button>
-
-      <button class="payment-card" onclick="openPayModal('Apple Gift Card')">
-        <i class="fa-brands fa-apple"></i>
-        <h4>Apple Gift Card</h4>
-        <p>Gift card payment</p>
       </button>
 
       <button class="payment-card" onclick="openPayModal('Venmo')">
@@ -654,7 +636,7 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border)}
       <i class="fa-solid fa-xmark"></i>
     </button>
     <span class="pay-modal-icon" id="payIcon">💳</span>
-    <h3 id="payTitle">PayPal</h3>
+    <h3 id="payTitle">Payment Method</h3>
     <p class="pay-sub">Send payment to the details below:</p>
     <div id="payDetails"></div>
     <div class="pay-modal-note">
@@ -755,11 +737,8 @@ footer{padding:50px 0 30px;border-top:1px solid var(--border)}
         <div class="form-group">
           <label>Preferred Payment Method</label>
           <select id="bPayment">
-            <option>PayPal</option>
             <option>Cash App</option>
             <option>Zelle</option>
-            <option>eTransfer</option>
-            <option>Apple Gift Card</option>
             <option>Venmo</option>
             <option>Chime</option>
             <option>Apple Pay</option>
@@ -868,7 +847,7 @@ document.querySelectorAll('.currency-btn').forEach(btn => {
 });
 
 const savedCurrency = localStorage.getItem('htxCurrency');
-if (savedCurrency && rates[savedCurrency]) updatePrices(savedCurrency);
+if(savedCurrency && rates[savedCurrency]) updatePrices(savedCurrency);
 
 /* ============================================
    MENU + SMOOTH SCROLL
@@ -978,13 +957,6 @@ function bookViaTelegram(){
    PAYMENT MODAL — No WhatsApp redirect
    ============================================ */
 const payInfo = {
-  'PayPal': {
-    icon: 'fa-brands fa-paypal',
-    details: [
-      { label: 'PayPal Email', value: '—' },
-      { label: 'Account Name', value: '—' }
-    ]
-  },
   'Cash App': {
     icon: 'fa-solid fa-dollar-sign',
     details: [
@@ -997,20 +969,6 @@ const payInfo = {
     details: [
       { label: 'Phone / Email', value: '—' },
       { label: 'Account Name', value: '—' }
-    ]
-  },
-  'eTransfer': {
-    icon: 'fa-solid fa-building-columns',
-    details: [
-      { label: 'Email', value: '—' },
-      { label: 'Account Name', value: '—' },
-      { label: 'Security Answer', value: '—' }
-    ]
-  },
-  'Apple Gift Card': {
-    icon: 'fa-brands fa-apple',
-    details: [
-      { label: 'Send Code Via Email', value: 'amusatmalikabidemi@gmail.com' }
     ]
   },
   'Venmo': {
